@@ -13,14 +13,20 @@
         <h1>RegexLab</h1>
         <div class="input-group">
             <label for="regex-input">Regular Expression:</label>
-            <input type="text" id="regex-input" placeholder="Enter your regex">
+            <div class="regex-flags-container">
+                <input type="text" id="regex-input" placeholder="Enter your regex">
+                <div class="flags-display">
+                    <span>/</span>
+                    <input type="text" id="flags-display-input" value="gm" maxlength="3">
+                </div>
+            </div>
         </div>
         <div class="input-group">
             <label for="flags-input">Flags:</label>
             <div id="flags-input">
-                <label><input type="checkbox" value="g"> Global (g)</label>
+                <label><input type="checkbox" value="g" checked> Global (g) (default)</label>
                 <label><input type="checkbox" value="i"> Case-insensitive (i)</label>
-                <label><input type="checkbox" value="m"> Multiline (m)</label>
+                <label><input type="checkbox" value="m" checked> Multiline (m) (default)</label>
             </div>
         </div>
         <div class="input-group">

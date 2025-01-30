@@ -1,24 +1,45 @@
-document.getElementById('test-button').addEventListener('click', function () {
-    const regexInput = document.getElementById('regex-input').value;
-    const testString = document.getElementById('test-string').value;
-    const flags = Array.from(document.querySelectorAll('#flags-input input:checked'))
+// Get references to DOM elements
+const regexInput = document.getElementById('regex-input');
+const testStringInput = document.getElementById('test-string');
+const flagsInput = document.getElementById('flags-input');
+const flagsDisplayInput = document.getElementById('flags-display-input');
+const testButton = document.getElementById('test-button');
+const matchResults = document.getElementById('match-results');
+
+// Default flags
+let currentFlags = 'gm';
+
+// Update flags display and checkboxes when flags are manually entered
+flagsDisplayInput.addEventListener('input', function () {
+    const newFlags = flagsDisplayInput.value;
+    currentFlags = newFlags;
+
+    // Update checkboxes based on the new flags
+    Array.from(flagsInput.querySelectorAll('input')).forEach(checkbox => {
+        checkbox.checked = newFlags.includes(checkbox.value);
+    });
+});
+
+// Update flags display when checkboxes are toggled
+flagsInput.addEventListener('change', function () {
+    const selectedFlags = Array.from(flagsInput.querySelectorAll('input:checked'))
         .map(checkbox => checkbox.value)
         .join('');
-    const matchResults = document.getElementById('match-results');
+    currentFlags = selectedFlags;
+    flagsDisplayInput.value = selectedFlags;
+});
+
+// Test regex when the button is clicked
+testButton.addEventListener('click', function () {
+    const regexPattern = regexInput.value;
+    const testString = testStringInput.value;
 
     // Clear previous results
     matchResults.innerHTML = '';
 
     try {
-        // Always include the 'g' flag for matchAll
-        const regex = new RegExp(regexInput, flags + 'g');
-        const matches = [];
-        let match;
-
-        // Use exec to find all matches
-        while ((match = regex.exec(testString)) !== null) {
-            matches.push(match);
-        }
+        const regex = new RegExp(regexPattern, currentFlags);
+        const matches = [...testString.matchAll(regex)];
 
         if (matches.length > 0) {
             // Highlight matches in the test string

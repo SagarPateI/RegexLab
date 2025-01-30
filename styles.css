@@ -65,6 +65,35 @@ button:hover {
     margin-top: 20px;
 }
 
+.regex-flags-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flags-display {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.flags-display span {
+    font-family: monospace;
+    color: #666;
+}
+
+#flags-display-input {
+    width: 30px;
+    font-family: monospace;
+    border: none;
+    background: none;
+    outline: none;
+    color: #333;
+}
+
 #match-results {
     background-color: #fff;
     padding: 10px;

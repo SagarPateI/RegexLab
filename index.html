@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegexLab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>RegexLab</h1>
+        <div class="input-group">
+            <label for="regex-input">Regular Expression:</label>
+            <input type="text" id="regex-input" placeholder="Enter your regex">
+        </div>
+        <div class="input-group">
+            <label for="flags-input">Flags:</label>
+            <div id="flags-input">
+                <label><input type="checkbox" value="g"> Global (g)</label>
+                <label><input type="checkbox" value="i"> Case-insensitive (i)</label>
+                <label><input type="checkbox" value="m"> Multiline (m)</label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="test-string">Test String:</label>
+            <textarea id="test-string" placeholder="Enter the string to test"></textarea>
+        </div>
+        <button id="test-button">Test Regex</button>
+        <div class="results">
+            <h2>Matches:</h2>
+            <div id="match-results"></div>
+        </div>
+        <div class="cheat-sheet">
+            <h2>Cheat Sheet</h2>
+            <div class="scrollable-list">
+                <ul>
+                    <li><strong>Newline</strong><br><code>\n</code></li>
+                    <li><strong>Carriage return</strong><br><code>\r</code></li>
+                    <li><strong>Tab</strong><br><code>\t</code></li>
+                    <li><strong>Null character</strong><br><code>\0</code></li>
+                    <li><strong>A single character of: a, b or c</strong><br><code>[abc]</code></li>
+                    <li><strong>A character except: a, b or c</strong><br><code>[^abc]</code></li>
+                    <li><strong>A character in the range: a-z</strong><br><code>[a-z]</code></li>
+                    <li><strong>A character not in the range: a-z</strong><br><code>[^a-z]</code></li>
+                    <li><strong>A character in the range: a-z or A-Z</strong><br><code>[a-zA-Z]</code></li>
+                    <li><strong>Letters and digits</strong><br><code>[[:alnum:]]</code></li>
+                    <li><strong>Letters</strong><br><code>[[:alpha:]]</code></li>
+                    <li><strong>ASCII codes 0-127</strong><br><code>[[:ascii:]]</code></li>
+                    <li><strong>Space or tab only</strong><br><code>[[:blank:]]</code></li>
+                    <li><strong>Control characters</strong><br><code>[[:cntrl:]]</code></li>
+                    <li><strong>Decimal digits</strong><br><code>[[:digit:]]</code></li>
+                    <li><strong>Visible characters (not space)</strong><br><code>[[:graph:]]</code></li>
+                    <li><strong>Lowercase letters</strong><br><code>[[:lower:]]</code></li>
+                    <li><strong>Visible characters</strong><br><code>[[:print:]]</code></li>
+                    <li><strong>Visible punctuation characters</strong><br><code>[[:punct:]]</code></li>
+                    <li><strong>Whitespace</strong><br><code>[[:space:]]</code></li>
+                    <li><strong>Uppercase letters</strong><br><code>[[:upper:]]</code></li>
+                    <li><strong>Word characters</strong><br><code>[[:word:]]</code></li>
+                    <li><strong>Hexadecimal digits</strong><br><code>[[:xdigit:]]</code></li>
+                    <li><strong>Start of word</strong><br><code>[[:&lt;:]]</code></li>
+                    <li><strong>End of word</strong><br><code>[[:&gt;:]]</code></li>
+                    <li><strong>Any single character</strong><br><code>.</code></li>
+                    <li><strong>Alternate - match either a or b</strong><br><code>a|b</code></li>
+                    <li><strong>Any whitespace character</strong><br><code>\s</code></li>
+                    <li><strong>Any non-whitespace character</strong><br><code>\S</code></li>
+                    <li><strong>Any digit</strong><br><code>\d</code></li>
+                    <li><strong>Any non-digit</strong><br><code>\D</code></li>
+                    <li><strong>Any word character</strong><br><code>\w</code></li>
+                    <li><strong>Any non-word character</strong><br><code>\W</code></li>
+                    <li><strong>Any Unicode sequences, linebreaks included</strong><br><code>\X</code></li>
+                    <li><strong>Match one data unit</strong><br><code>\C</code></li>
+                    <li><strong>Unicode newlines</strong><br><code>\R</code></li>
+                    <li><strong>Match anything but a newline</strong><br><code>\N</code></li>
+                    <li><strong>Vertical whitespace character</strong><br><code>\v</code></li>
+                    <li><strong>Negation of \v</strong><br><code>\V</code></li>
+                    <li><strong>Horizontal whitespace character</strong><br><code>\h</code></li>
+                    <li><strong>Negation of \h</strong><br><code>\H</code></li>
+                    <li><strong>Reset match</strong><br><code>\K</code></li>
+                    <li><strong>Match subpattern number #</strong><br><code>\#</code></li>
+                    <li><strong>Unicode property X</strong><br><code>\pX</code></li>
+                    <li><strong>Unicode property or script category</strong><br><code>\p{...}</code></li>
+                    <li><strong>Negation of \pX</strong><br><code>\PX</code></li>
+                    <li><strong>Negation of \p</strong><br><code>\P{...}</code></li>
+                    <li><strong>Quote; treat as literals</strong><br><code>\Q...\E</code></li>
+                    <li><strong>Match subpattern name</strong><br><code>\k{name}</code></li>
+                    <li><strong>Match subpattern name</strong><br><code>\k&lt;name&gt;</code></li>
+                    <li><strong>Match subpattern name</strong><br><code>\k'name'</code></li>
+                    <li><strong>Match nth subpattern</strong><br><code>\gn</code></li>
+                    <li><strong>Match nth subpattern</strong><br><code>\g{n}</code></li>
+                    <li><strong>Match text the nth relative previous subpattern matched</strong><br><code>\g{-n}</code></li>
+                    <li><strong>Match expression defined in the nth capture group</strong><br><code>\g&lt;n&gt;</code></li>
+                    <li><strong>Match expression defined in the nth relative upcoming capture
+                            group</strong><br><code>\g&lt;+n&gt;</code></li>
+                    <li><strong>Match expression defined in the nth capture group</strong><br><code>\g'n'</code></li>
+                    <li><strong>Match expression defined in the nth relative upcoming subpattern</strong><br><code>\g'+n'</code>
+                    </li>
+                    <li><strong>Match previously-named capture group letter</strong><br><code>\g{letter}</code></li>
+                    <li><strong>Match expression defined in the capture group named
+                            "letter"</strong><br><code>\g&lt;letter&gt;</code></li>
+                    <li><strong>Match expression defined in the named capture group letter</strong><br><code>\g'letter'</code>
+                    </li>
+                    <li><strong>Hex character YY</strong><br><code>\xYY</code></li>
+                    <li><strong>Hex character YYYY</strong><br><code>\x{YYYY}</code></li>
+                    <li><strong>Octal character ddd</strong><br><code>\ddd</code></li>
+                    <li><strong>Control character Y</strong><br><code>\cY</code></li>
+                    <li><strong>Backspace character</strong><br><code>[\b]</code></li>
+                    <li><strong>Makes any character literal</strong><br><code>\</code></li>
+                    <li><strong>Non-capturing group</strong><br><code>(?:...)</code></li>
+                    <li><strong>Capturing group</strong><br><code>(...)</code></li>
+                    <li><strong>Atomic group (non-capturing)</strong><br><code>(?&gt;...)</code></li>
+                    <li><strong>Duplicate/reset subpattern group number</strong><br><code>(?|...)</code></li>
+                    <li><strong>Comment group</strong><br><code>(?#...)</code></li>
+                    <li><strong>Named Capturing Group</strong><br><code>(?'name'...)</code></li>
+                    <li><strong>Named Capturing Group</strong><br><code>(?&lt;name&gt;...)</code></li>
+                    <li><strong>Named Capturing Group</strong><br><code>(?P&lt;name&gt;...)</code></li>
+                    <li><strong>Inline modifiers</strong><br><code>(?imsxUJnxx)</code></li>
+                    <li><strong>Localized inline modifiers</strong><br><code>(?imsxUJnxx:...)</code></li>
+                    <li><strong>Conditional statement</strong><br><code>(?(1)yes|no)</code></li>
+                    <li><strong>Conditional statement</strong><br><code>(?(R)yes|no)</code></li>
+                    <li><strong>Recursive Conditional statement</strong><br><code>(?(R#)yes|no)</code></li>
+                    <li><strong>Conditional statement</strong><br><code>(?(R&amp;name)yes|no)</code></li>
+                    <li><strong>Lookahead conditional</strong><br><code>(?(?=...)yes|no)</code></li>
+                    <li><strong>Lookbehind conditional</strong><br><code>(?(?&lt;=...)yes|no)</code></li>
+                    <li><strong>Recurse entire pattern</strong><br><code>(?R)</code></li>
+                    <li><strong>Match expression defined in capture group 1</strong><br><code>(?1)</code></li>
+                    <li><strong>Match expression defined in the first relative capture group</strong><br><code>(?+1)</code></li>
+                    <li><strong>Match expression defined in capture group name</strong><br><code>(?&amp;name)</code></li>
+                    <li><strong>Match subpattern name</strong><br><code>(?P=name)</code></li>
+                    <li><strong>Match expression defined in the capture group "{name}"</strong><br><code>(?P&gt;name)</code>
+                    </li>
+                    <li><strong>Pre-define patterns before using them</strong><br><code>(?(DEFINE)...)</code></li>
+                    <li><strong>Positive Lookahead</strong><br><code>(?=...)</code></li>
+                    <li><strong>Negative Lookahead</strong><br><code>(?!...)</code></li>
+                    <li><strong>Positive Lookbehind</strong><br><code>(?&lt;=...)</code></li>
+                    <li><strong>Negative Lookbehind</strong><br><code>(?&lt;!...)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*ACCEPT)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*FAIL)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*MARK:NAME)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*COMMIT)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*PRUNE)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*SKIP)</code></li>
+                    <li><strong>Control verb</strong><br><code>(*THEN)</code></li>
+                    <li><strong>Pattern modifier</strong><br><code>(*UTF)</code></li>
+                    <li><strong>Pattern modifier</strong><br><code>(*UTF8)</code></li>
+                    <li><strong>Pattern modifier</strong><br><code>(*UTF16)</code></li>
+                    <li><strong>Pattern modifier</strong><br><code>(*UTF32)</code></li>
+                    <li><strong>Pattern modifier</strong><br><code>(*UCP)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*CR)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*LF)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*CRLF)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*ANYCRLF)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*ANY)</code></li>
+                    <li><strong>Empty match modifier</strong><br><code>(*NOTEMPTY)</code></li>
+                    <li><strong>Empty match modifier</strong><br><code>(*NOTEMPTY_ATSTART)</code></li>
+                    <li><strong>JIT Modifier</strong><br><code>(*NO_JIT)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>\R</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*BSR_ANYCRLF)</code></li>
+                    <li><strong>Line break modifier</strong><br><code>(*BSR_UNICODE)</code></li>
+                    <li><strong>Regex engine modifier</strong><br><code>(*LIMIT_MATCH=x)</code></li>
+                    <li><strong>Regex engine modifier</strong><br><code>(*LIMIT_RECURSION=d)</code></li>
+                    <li><strong>Regex engine modifier</strong><br><code>(*NO_AUTO_POSSESS)</code></li>
+                    <li><strong>Regex engine modifier</strong><br><code>(*NO_START_OPT)</code></li>
+                    <li><strong>Zero or one of a</strong><br><code>a?</code></li>
+                    <li><strong>Zero or more of a</strong><br><code>a*</code></li>
+                    <li><strong>One or more of a</strong><br><code>a+</code></li>
+                    <li><strong>Exactly 3 of a</strong><br><code>a{3}</code></li>
+                    <li><strong>3 or more of a</strong><br><code>a{3,}</code></li>
+                    <li><strong>Between 3 and 6 of a</strong><br><code>a{3,6}</code></li>
+                    <li><strong>Greedy quantifier</strong><br><code>a*</code></li>
+                    <li><strong>Lazy quantifier</strong><br><code>a*?</code></li>
+                    <li><strong>Possessive quantifier</strong><br><code>a*+</code></li>
+                    <li><strong>Start of match</strong><br><code>\G</code></li>
+                    <li><strong>Start of string</strong><br><code>^</code></li>
+                    <li><strong>End of string</strong><br><code>$</code></li>
+                    <li><strong>Start of string</strong><br><code>\A</code></li>
+                    <li><strong>End of string</strong><br><code>\Z</code></li>
+                    <li><strong>Absolute end of string</strong><br><code>\z</code></li>
+                    <li><strong>A word boundary</strong><br><code>\b</code></li>
+                    <li><strong>Non-word boundary</strong><br><code>\B</code></li>
+                    <li><strong>Global</strong><br><code>g</code></li>
+                    <li><strong>Multiline</strong><br><code>m</code></li>
+                    <li><strong>Case insensitive</strong><br><code>i</code></li>
+                    <li><strong>Ignore whitespace / verbose</strong><br><code>x</code></li>
+                    <li><strong>Single line</strong><br><code>s</code></li>
+                    <li><strong>Unicode</strong><br><code>u</code></li>
+                    <li><strong>eXtra</strong><br><code>X</code></li>
+                    <li><strong>Ungreedy</strong><br><code>U</code></li>
+                    <li><strong>Anchor</strong><br><code>A</code></li>
+                    <li><strong>Duplicate group names</strong><br><code>J</code></li>
+                    <li><strong>Non-capturing groups</strong><br><code>n</code></li>
+                    <li><strong>Ignore all whitespace / verbose</strong><br><code>xx</code></li>
+                    <li><strong>Complete match contents</strong><br><code>$0</code></li>
+                    <li><strong>Contents in capture group 1</strong><br><code>$1</code></li>
+                    <li><strong>Insert a dollar sign</strong><br><code>$$</code></li>
+                    <li><strong>Contents in capture group foo</strong><br><code>${foo}</code></li>
+                    <li><strong>Hexadecimal replacement values</strong><br><code>\x20</code></li>
+                    <li><strong>Hexadecimal replacement values</strong><br><code>\x{06fa}</code></li>
+                    <li><strong>Insert a tab</strong><br><code>\t</code></li>
+                    <li><strong>Insert a carriage return</strong><br><code>\r</code></li>
+                    <li><strong>Insert a newline</strong><br><code>\n</code></li>
+                    <li><strong>Insert a form-feed</strong><br><code>\f</code></li>
+                    <li><strong>Uppercase Transformation</strong><br><code>\U</code></li>
+                    <li><strong>Lowercase Transformation</strong><br><code>\L</code></li>
+                    <li><strong>Terminate any Transformation</strong><br><code>\E</code></li>
+                    <li><strong>Conditional replacement</strong><br><code>${1:+foo:bar}</code></li>
+                    <li><strong>Insert the escaped literal</strong><br><code>\[</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

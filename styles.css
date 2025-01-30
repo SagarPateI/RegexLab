@@ -109,6 +109,27 @@ button:hover {
     font-family: monospace;
 }
 
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
+}
+
+.match-detail {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff;
+}
+
+.no-matches,
+.error {
+    padding: 10px;
+    background-color: #ffe6e6;
+    border-left: 3px solid #ff4d4d;
+    color: #cc0000;
+}
+
 code {
     background-color: #f4f4f9;
     padding: 2px 4px;

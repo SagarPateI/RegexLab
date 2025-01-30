@@ -10,31 +10,46 @@ document.getElementById('test-button').addEventListener('click', function () {
     matchResults.innerHTML = '';
 
     try {
-        const regex = new RegExp(regexInput, flags);
-        const matches = testString.matchAll(regex);
+        // Always include the 'g' flag for matchAll
+        const regex = new RegExp(regexInput, flags + 'g');
+        const matches = [];
+        let match;
 
-        let hasMatches = false;
-        for (const match of matches) {
-            hasMatches = true;
-            const matchText = match[0];
-            const startIndex = match.index;
-            const endIndex = startIndex + matchText.length;
-
-            // Highlight the match in the test string
-            const highlightedText = testString.substring(0, startIndex) +
-                `<span class="highlight">${matchText}</span>` +
-                testString.substring(endIndex);
-
-            // Display match details
-            const matchDetails = document.createElement('div');
-            matchDetails.className = 'match-detail';
-            matchDetails.innerHTML = `
-        <strong>Match:</strong> "${matchText}" (positions ${startIndex}-${endIndex})
-      `;
-            matchResults.appendChild(matchDetails);
+        // Use exec to find all matches
+        while ((match = regex.exec(testString)) !== null) {
+            matches.push(match);
         }
 
-        if (!hasMatches) {
+        if (matches.length > 0) {
+            // Highlight matches in the test string
+            let highlightedText = testString;
+            let offset = 0;
+
+            matches.forEach(match => {
+                const startIndex = match.index + offset;
+                const endIndex = startIndex + match[0].length;
+                highlightedText =
+                    highlightedText.substring(0, startIndex) +
+                    `<span class="highlight">${match[0]}</span>` +
+                    highlightedText.substring(endIndex);
+                offset += '<span class="highlight"></span>'.length - match[0].length;
+            });
+
+            // Display highlighted text
+            const highlightedTextElement = document.createElement('div');
+            highlightedTextElement.innerHTML = `<strong>Highlighted Matches:</strong><br>${highlightedText}`;
+            matchResults.appendChild(highlightedTextElement);
+
+            // Display match details
+            matches.forEach((match, index) => {
+                const matchDetails = document.createElement('div');
+                matchDetails.className = 'match-detail';
+                matchDetails.innerHTML = `
+          <strong>Match ${index + 1}:</strong> "${match[0]}" (positions ${match.index}-${match.index + match[0].length})
+        `;
+                matchResults.appendChild(matchDetails);
+            });
+        } else {
             matchResults.innerHTML = '<div class="no-matches">No matches found.</div>';
         }
     } catch (error) {

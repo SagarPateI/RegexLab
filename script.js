@@ -1,10 +1,10 @@
 // Get references to DOM elements
 const regexInput = document.getElementById('regex-input');
 const testStringInput = document.getElementById('test-string');
-const flagsInput = document.getElementById('flags-input');
 const flagsDisplayInput = document.getElementById('flags-display-input');
 const testButton = document.getElementById('test-button');
 const matchResults = document.getElementById('match-results');
+const dropdownContent = document.querySelector('.dropdown-content');
 
 // Default flags
 let currentFlags = 'gm';
@@ -15,18 +15,20 @@ flagsDisplayInput.addEventListener('input', function () {
     currentFlags = newFlags;
 
     // Update checkboxes based on the new flags
-    Array.from(flagsInput.querySelectorAll('input')).forEach(checkbox => {
+    Array.from(dropdownContent.querySelectorAll('input')).forEach(checkbox => {
         checkbox.checked = newFlags.includes(checkbox.value);
     });
 });
 
 // Update flags display when checkboxes are toggled
-flagsInput.addEventListener('change', function () {
-    const selectedFlags = Array.from(flagsInput.querySelectorAll('input:checked'))
-        .map(checkbox => checkbox.value)
-        .join('');
-    currentFlags = selectedFlags;
-    flagsDisplayInput.value = selectedFlags;
+dropdownContent.addEventListener('change', function (event) {
+    if (event.target.type === 'checkbox') {
+        const selectedFlags = Array.from(dropdownContent.querySelectorAll('input:checked'))
+            .map(checkbox => checkbox.value)
+            .join('');
+        currentFlags = selectedFlags;
+        flagsDisplayInput.value = selectedFlags;
+    }
 });
 
 // Test regex when the button is clicked

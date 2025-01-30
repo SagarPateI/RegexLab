@@ -15,18 +15,28 @@
             <label for="regex-input">Regular Expression:</label>
             <div class="regex-flags-container">
                 <input type="text" id="regex-input" placeholder="Enter your regex">
+                <div class="dropdown">
+                    <button class="dropdown-button">Regex Flags</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="g"> Global (g) - Match all occurrences, not just the
+                            first</label>
+                        <label><input type="checkbox" value="i"> Case-insensitive (i) - Match letters regardless of
+                            case</label>
+                        <label><input type="checkbox" value="m"> Multiline (m) - ^ and $ match start/end of each
+                            line</label>
+                        <label><input type="checkbox" value="s"> Single line (s) - Dot (.) matches newline
+                            characters</label>
+                        <label><input type="checkbox" value="u"> Unicode (u) - Match with full Unicode support</label>
+                        <label><input type="checkbox" value="y"> Sticky (y) - Match only from the last match
+                            position</label>
+                        <label><input type="checkbox" value="d"> Has indices (d) - Include match indices in
+                            results</label>
+                    </div>
+                </div>
                 <div class="flags-display">
                     <span>/</span>
-                    <input type="text" id="flags-display-input" value="gm" maxlength="3">
+                    <input type="text" id="flags-display-input" value="gm" maxlength="10">
                 </div>
-            </div>
-        </div>
-        <div class="input-group">
-            <label for="flags-input">Flags:</label>
-            <div id="flags-input">
-                <label><input type="checkbox" value="g" checked> Global (g) (default)</label>
-                <label><input type="checkbox" value="i"> Case-insensitive (i)</label>
-                <label><input type="checkbox" value="m" checked> Multiline (m) (default)</label>
             </div>
         </div>
         <div class="input-group">
@@ -95,17 +105,21 @@
                     <li><strong>Match subpattern name</strong><br><code>\k'name'</code></li>
                     <li><strong>Match nth subpattern</strong><br><code>\gn</code></li>
                     <li><strong>Match nth subpattern</strong><br><code>\g{n}</code></li>
-                    <li><strong>Match text the nth relative previous subpattern matched</strong><br><code>\g{-n}</code></li>
-                    <li><strong>Match expression defined in the nth capture group</strong><br><code>\g&lt;n&gt;</code></li>
+                    <li><strong>Match text the nth relative previous subpattern matched</strong><br><code>\g{-n}</code>
+                    </li>
+                    <li><strong>Match expression defined in the nth capture group</strong><br><code>\g&lt;n&gt;</code>
+                    </li>
                     <li><strong>Match expression defined in the nth relative upcoming capture
                             group</strong><br><code>\g&lt;+n&gt;</code></li>
                     <li><strong>Match expression defined in the nth capture group</strong><br><code>\g'n'</code></li>
-                    <li><strong>Match expression defined in the nth relative upcoming subpattern</strong><br><code>\g'+n'</code>
+                    <li><strong>Match expression defined in the nth relative upcoming
+                            subpattern</strong><br><code>\g'+n'</code>
                     </li>
                     <li><strong>Match previously-named capture group letter</strong><br><code>\g{letter}</code></li>
                     <li><strong>Match expression defined in the capture group named
                             "letter"</strong><br><code>\g&lt;letter&gt;</code></li>
-                    <li><strong>Match expression defined in the named capture group letter</strong><br><code>\g'letter'</code>
+                    <li><strong>Match expression defined in the named capture group
+                            letter</strong><br><code>\g'letter'</code>
                     </li>
                     <li><strong>Hex character YY</strong><br><code>\xYY</code></li>
                     <li><strong>Hex character YYYY</strong><br><code>\x{YYYY}</code></li>
@@ -131,10 +145,13 @@
                     <li><strong>Lookbehind conditional</strong><br><code>(?(?&lt;=...)yes|no)</code></li>
                     <li><strong>Recurse entire pattern</strong><br><code>(?R)</code></li>
                     <li><strong>Match expression defined in capture group 1</strong><br><code>(?1)</code></li>
-                    <li><strong>Match expression defined in the first relative capture group</strong><br><code>(?+1)</code></li>
-                    <li><strong>Match expression defined in capture group name</strong><br><code>(?&amp;name)</code></li>
+                    <li><strong>Match expression defined in the first relative capture
+                            group</strong><br><code>(?+1)</code></li>
+                    <li><strong>Match expression defined in capture group name</strong><br><code>(?&amp;name)</code>
+                    </li>
                     <li><strong>Match subpattern name</strong><br><code>(?P=name)</code></li>
-                    <li><strong>Match expression defined in the capture group "{name}"</strong><br><code>(?P&gt;name)</code>
+                    <li><strong>Match expression defined in the capture group
+                            "{name}"</strong><br><code>(?P&gt;name)</code>
                     </li>
                     <li><strong>Pre-define patterns before using them</strong><br><code>(?(DEFINE)...)</code></li>
                     <li><strong>Positive Lookahead</strong><br><code>(?=...)</code></li>
@@ -215,8 +232,7 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>

@@ -9,6 +9,9 @@ const dropdownContent = document.querySelector('.dropdown-content');
 // Default flags
 let currentFlags = 'gm';
 
+// Initialize the flags display input with the default flags
+flagsDisplayInput.value = currentFlags;
+
 // Update flags display and checkboxes when flags are manually entered
 flagsDisplayInput.addEventListener('input', function () {
     const newFlags = flagsDisplayInput.value;
